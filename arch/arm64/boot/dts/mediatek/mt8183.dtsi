@@ -560,8 +560,6 @@
 	gpu_opp_table: opp-table-0 {
 		compatible = "operating-points-v2", "operating-points-v2-mali";
 		opp-shared;
-
-<<<<<<< HEAD
 		opp-300000000 {
 			opp-hz = /bits/ 64 <300000000>;
 			opp-microvolt = <625000>;
@@ -661,13 +659,11 @@
 				opp-core-mask = /bits/ 64 <0xf>;
 			};
 		};
-=======
 			opp-300000000 {
 				opp-hz = /bits/ 64 <300000000>;
 				opp-microvolt = <625000>, <850000>;
 				opp-core-mask = /bits/ 64 <0xf>;
 			};
->>>>>>> 32280bb8e020 (dts/mt/mt8183: Add clocks for Mali-G72 (bifrost) GPU, fix opp tables.)
 
 			opp-320000000 {
 				opp-hz = /bits/ 64 <320000000>;
