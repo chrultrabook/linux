@@ -561,11 +561,9 @@
 		compatible = "operating-points-v2";
 		opp-shared;
 
-<<<<<<< HEAD
 		opp-300000000 {
 			opp-hz = /bits/ 64 <300000000>;
 			opp-microvolt = <625000>;
-=======
 			opp-300000000 {
 				opp-hz = /bits/ 64 <300000000>;
 				opp-microvolt = <625000>;
@@ -661,7 +659,6 @@
 				opp-microvolt = <825000>;
 				opp-core-mask = /bits/ 64 <0xf>;
 			};
->>>>>>> 1909ff276244 (arm64: dts: mediatek: mt8183: Mali OPP tables...)
 		};
 
 		opp-320000000 {
