@@ -124,7 +124,7 @@
 	};
 
 	sound: mt8183-sound {
-		mediatek,platform = <&afe>;try
+		mediatek,platform = <&afe>;
 		mediatek,hdmi-codec = <&it6505dptx>;
 		pinctrl-names = "default",
 				"aud_tdm_out_on",
