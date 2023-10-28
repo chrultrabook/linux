@@ -560,105 +560,6 @@
 	gpu_opp_table: opp-table-0 {
 		compatible = "operating-points-v2", "operating-points-v2-mali";
 		opp-shared;
-		opp-300000000 {
-			opp-hz = /bits/ 64 <300000000>;
-			opp-microvolt = <625000>;
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				opp-microvolt = <625000>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				opp-microvolt = <631250>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-340000000 {
-				opp-hz = /bits/ 64 <340000000>;
-				opp-microvolt = <637500>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-360000000 {
-				opp-hz = /bits/ 64 <360000000>;
-				opp-microvolt = <643750>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				opp-microvolt = <650000>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				opp-microvolt = <656250>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-420000000 {
-				opp-hz = /bits/ 64 <420000000>;
-				opp-microvolt = <662500>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-460000000 {
-				opp-hz = /bits/ 64 <460000000>;
-				opp-microvolt = <675000>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-500000000 {
-				opp-hz = /bits/ 64 <500000000>;
-				opp-microvolt = <687500>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-540000000 {
-				opp-hz = /bits/ 64 <540000000>;
-				opp-microvolt = <700000>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-580000000 {
-				opp-hz = /bits/ 64 <580000000>;
-				opp-microvolt = <712500>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-620000000 {
-				opp-hz = /bits/ 64 <620000000>;
-				opp-microvolt = <725000>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-653000000 {
-				opp-hz = /bits/ 64 <653000000>;
-				opp-microvolt = <743750>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-698000000 {
-				opp-hz = /bits/ 64 <698000000>;
-				opp-microvolt = <768750>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-743000000 {
-				opp-hz = /bits/ 64 <743000000>;
-				opp-microvolt = <793750>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-
-			opp-800000000 {
-				opp-hz = /bits/ 64 <800000000>;
-				opp-microvolt = <825000>;
-				opp-core-mask = /bits/ 64 <0xf>;
-			};
-		};
 			opp-300000000 {
 				opp-hz = /bits/ 64 <300000000>;
 				opp-microvolt = <625000>;
@@ -1907,7 +1808,7 @@
 			mediatek,gce-client-reg = <&gce SUBSYS_1400XXXX 0 0x1000>;
 		};
 
-		mdp3_rdma0: mdp3-rdma0@14001000 {
+		mdp3_rdma0: dma-controller0@14001000 {
 			compatible = "mediatek,mt8183-mdp3",
 				     "mediatek,mt8183-mdp3-rdma";
 			mediatek,scp = <&scp>;
@@ -1944,6 +1845,7 @@
 				 <&gce 21 CMDQ_THR_PRIO_LOWEST 0>,
 				 <&gce 22 CMDQ_THR_PRIO_LOWEST 0>,
 				 <&gce 23 CMDQ_THR_PRIO_LOWEST 0>;
+				 #dma-cells = <1>;
 			mdp3-rsz0 = <&mdp3_rsz0>; /* debug only */
 			mdp3-rsz1 = <&mdp3_rsz1>; /* debug only */
 			mdp3-wrot0 = <&mdp3_wrot0>; /* debug only */
@@ -1975,7 +1877,7 @@
 			clocks = <&mmsys CLK_MM_MDP_RSZ1>;
 		};
 
-		mdp3_wrot0: mdp3-wrot0@14005000 {
+		mdp3_wrot0: dma-controller0@14005000 {
 			compatible = "mediatek,mt8183-mdp3-wrot";
 			mediatek,mdp3-id = <0>;
 			reg = <0 0x14005000 0 0x1000>;
@@ -1985,6 +1887,7 @@
 			power-domains = <&spm MT8183_POWER_DOMAIN_DISP>;
 			clocks = <&mmsys CLK_MM_MDP_WROT0>;
 			iommus = <&iommu M4U_PORT_MDP_WROT0>;
+			#dma-cells = <1>;
 		};
 
 		mdp3_wdma: mdp3-wdma@14006000 {
@@ -2258,20 +2161,30 @@
 			#clock-cells = <1>;
 		};
 
-		vcodec_dec: vcodec@16000000 {
+		vcodec_dec: video-codec@16020000 {
 			compatible = "mediatek,mt8183-vcodec-dec";
-			reg = <0 0x16000000 0 0x1000>,		/* VDEC_SYS */
-				 <0 0x16020000 0 0x1000>,		/* VDEC_MISC */
-				 <0 0x16021000 0 0x800>,		/* VDEC_VLD */
-				 <0 0x16021800 0 0x800>,		/* VDEC_TOP */
-				 <0 0x16022000 0 0x1000>,		/* VDEC_MC */
-				 <0 0x16023000 0 0x1000>,		/* VDEC_AVCVLD */
-				 <0 0x16024000 0 0x1000>,		/* VDEC_AVCMV */
-				 <0 0x16025000 0 0x1000>,		/* VDEC_PP */
-				 <0 0x16026800 0 0x800>,		/* VP8_VD */
-				 <0 0x16027000 0 0x800>,		/* VP6_VD */
-				 <0 0x16027800 0 0x800>,		/* VP8_VL */
-				 <0 0x16028400 0 0x400>;		/* VP9_VD */
+			reg = <0 0x16020000 0 0x1000>,		/* VDEC_MISC */
+			      <0 0x16021000 0 0x800>,		/* VDEC_VLD */
+			      <0 0x16021800 0 0x800>,		/* VDEC_TOP */
+			      <0 0x16022000 0 0x1000>,		/* VDEC_MC */
+			      <0 0x16023000 0 0x1000>,		/* VDEC_AVCVLD */
+			      <0 0x16024000 0 0x1000>,		/* VDEC_AVCMV */
+			      <0 0x16025000 0 0x1000>,		/* VDEC_PP */
+			      <0 0x16026800 0 0x800>,		/* VP8_VD */
+			      <0 0x16027000 0 0x800>,		/* VP6_VD */
+			      <0 0x16027800 0 0x800>,		/* VP8_VL */
+			      <0 0x16028400 0 0x400>;		/* VP9_VD */
+			reg-names = "misc",
+				    "ld",
+				    "top",
+				    "cm",
+				    "ad",
+				    "av",
+				    "pp",
+				    "hwd",
+				    "hwq",
+				    "hwb",
+				    "hwg";
 			interrupts = <GIC_SPI 250 IRQ_TYPE_LEVEL_LOW>;
 			mediatek,larb = <&larb1>;
 			iommus = <&iommu M4U_PORT_HW_VDEC_MC_EXT>,
@@ -2284,7 +2197,7 @@
 			mediatek,scp = <&scp>;
 			power-domains = <&spm MT8183_POWER_DOMAIN_VDEC>;
 			clocks = <&vdecsys CLK_VDEC_VDEC>;
-			clock-names = "MT_CG_VDEC";
+			clock-names = "vdec";
 		};
 
 		larb1: larb@16010000 {
