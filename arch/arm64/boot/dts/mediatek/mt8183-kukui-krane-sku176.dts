@@ -13,7 +13,7 @@
 #include "mt8183-kukui-krane.dtsi"
 
 / {
-	model = "MediaTek krane sku176 board";
+	model = "Lenovo Chromebook Duet (BOE)";
 	chassis-type = "tablet";
 	compatible = "google,krane-sku176", "google,krane", "mediatek,mt8183";
 };

@@ -8,7 +8,7 @@
 #include "mt8183-kukui-audio-ts3a227e-rt1015p.dtsi"
 
 / {
-	model = "Google fennel14 sku2 board";
+	model = "Lenovo IdeaPad 3 Chromebook (SKU2)";
 	compatible = "google,fennel-sku2", "google,fennel", "mediatek,mt8183";
 };
 
